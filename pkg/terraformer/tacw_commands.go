@@ -224,6 +224,9 @@ func (wb *TerraACWallbox) cmdAuthenticate() (data []byte, err error) {
 		return nil, err
 	}
 
+	if len(rtn.data) == 0 {
+		return nil, errors.New("likely patched - empty auth response")
+	}
 	if len(rtn.data) < 34 {
 		return nil, errors.New("auth response not long enough")
 	}
